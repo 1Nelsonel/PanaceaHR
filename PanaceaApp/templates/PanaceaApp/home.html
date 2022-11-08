@@ -1,0 +1,109 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<!-- Start app main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="card card-statistic-2">
+                   
+                    <div class="card-icon shadow-primary bg-primary">
+                        <i class="fas fa-archive"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Employee</h4>
+                        </div>
+                        <div class="card-body">
+                            {{employees.count}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="card card-statistic-2">
+                   
+                    <div class="card-icon shadow-primary bg-primary">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Balance</h4>
+                        </div>
+                        <div class="card-body">
+                            $187,13
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="card card-statistic-2">
+                    
+                    <div class="card-icon shadow-primary bg-primary">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Sales</h4>
+                        </div>
+                        <div class="card-body">
+                            4,732
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-deck">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Employee</h4>
+                        <div class="card-header-action">
+                            <a href="{% url 'addEmployee' %}" class="btn btn-danger">Add Employee<i
+                                    class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive table-invoice">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Names</th>
+                                    <th>ID Number</th>
+                                    <th>Phone Number</th>
+                                    <th>Date Of Birth</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Position</th>
+                                </tr>
+
+                                {% for employee in employees %}
+                                <tr>
+                                    <td class="font-weight-600">{{forloop.counter}}</td>
+                                    <td class="font-weight-600"><a class="font-weight-600"
+                                            href="{% url 'employeeDetail' employee.id %}">{{employee.fullname}}</a></td>
+                                    <td class="font-weight-600">{{employee.idnumber}}</td>
+                                    <td class="font-weight-600">{{employee.telephone}}</td>
+                                    <td class="font-weight-600">{{employee.dateofbirth}}</td>
+                                    <td class="font-weight-600">{{employee.email}}</td>
+                                    <td class="font-weight-600">{{employee.gender}}</td>
+                                    <td class="font-weight-600">{{employee.position}}</td>
+    
+                                </tr>
+                                {% endfor %}
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
