@@ -1,0 +1,69 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<!-- Start app main Content -->
+<div class="main-content">
+    <section class="section">
+        
+        <div class="row row-deck">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>employees</h4>
+                        <div class="card-header-action">
+                    
+                                <button class="btn btn-success" onclick="printDiv()" type="submit">Print Payroll</button>
+                            
+                            <a href="{% url 'addSalary' %}" class="btn btn-primary">Add Salary Record</a>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive table-invoice">
+                            <table class="table table-striped" id="table-1">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Names</th>
+                                        <th>Salary</th>
+                                        <th>Allowances</th>
+                                        <th>NHIF</th>
+                                        <th>NSSF</th>
+                                        <th>Net Salary</th>
+                                        <th>Action</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for salary in salarys %}
+                                    <tr>
+                                        <td class="font-weight-600">{{forloop.counter}}</td>
+                                        <td class="font-weight-600"><a class="font-weight-600" 
+                                            href="{% url 'salaryDetail' salary.id %}">{{salary.employee.fullname}}</a>
+                                        </td>
+                                        <td class="font-weight-600">Ksh. {{salary.salary}}</td>
+                                        <td class="font-weight-600">Ksh. {{salary.allowance}}</td>
+                                        <td class="font-weight-600">Ksh. {{salary.nhif}}</td>
+                                        <td class="font-weight-600">Ksh. {{salary.nssf}}</td>
+                                        <td class="font-weight-600">Ksh. {{salary.netSalary}}</td>
+                                        <td>
+                                            <a href="{% url 'editSalary' salary.id %}" class="btn btn-primary">edit</a>
+                                            <a href="{% url 'deleteSalary' salary.id %}" class="btn btn-danger">delete</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+{% endblock %}

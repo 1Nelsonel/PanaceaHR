@@ -22,36 +22,31 @@
                 <div class="col-4 col-md-4 col-lg-3">
                     <div class="card profile-widget">
                         <div class="profile-widget-header">
-                            <img alt="image" src="{% static 'assets/img/avatar/avatar-1.png' %}"
+                            <img alt="image" src="{% static 'assets/img/user.png' %}"
                                 class="rounded-circle profile-widget-picture">
-                            <!-- <div class="profile-widget-items">
+                            <div class="profile-widget-items">
                                 <div class="profile-widget-item">
-                                    <div class="profile-widget-item-label">Posts</div>
-                                    <div class="profile-widget-item-value">187</div>
+                                    <div class="profile-widget-item-value"></div>
+                                    <div class="profile-widget-item-value"></div>
                                 </div>
-                                <div class="profile-widget-item">
-                                    <div class="profile-widget-item-label">Followers</div>
-                                    <div class="profile-widget-item-value">6,8K</div>
-                                </div>
-                                <div class="profile-widget-item">
-                                    <div class="profile-widget-item-label">Following</div>
-                                    <div class="profile-widget-item-value">2,1K</div>
-                                </div>
-                            </div> -->
+                            </div>
                         </div>
                         <div class="profile-widget-description">
                             <div class="profile-widget-name">{{employee.fullname}}<div
                                     class="text-muted d-inline font-weight-normal">
+                                    <div class="slash"></div> {{employee.department}}
                                     <div class="slash"></div> {{employee.position}}
                                 </div>
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
                 <div class="col-8 col-md-8 col-lg-9">
                     <div class="card">
-                        <form method="post" class="needs-validation" novalidate="">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+
                             <div class="card-header">
                                 <h4>Edit Profile</h4>
                             </div>
@@ -59,45 +54,106 @@
                                 <div class="row">
                                     <div class="form-group col-md-6 col-12">
                                         <label>Name</label>
-                                        <input type="text" class="form-control" value="{{employee.fullname}}" required="">
-                                        <div class="invalid-feedback">Please fill in the first name</div>
+                                        <input type="text" name="fullname" class="form-control"
+                                            value="{{employee.fullname}}">
                                     </div>
+
                                     <div class="form-group col-md-6 col-12">
                                         <label>Id Number</label>
-                                        <input type="text" class="form-control" value="{{employee.idnumber}}" required="">
-                                        <div class="invalid-feedback">Please fill in the last name</div>
+                                        <input type="number" name="idnumber" class="form-control"
+                                            value="{{employee.idnumber}}">
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="form-group col-md-6 col-12">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" value="{{employee.email}}" required="">
-                                        <div class="invalid-feedback">Please fill in the email</div>
+                                        <input type="email" name="email" class="form-control"
+                                            value="{{employee.email}}">
                                     </div>
                                     <div class="form-group col-md-6 col-12">
                                         <label>Phone</label>
-                                        <input type="tel" class="form-control" value="{{employee.telephone}}">
+                                        <input type="tel" name="telephone" class="form-control"
+                                            value="{{employee.telephone}}">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="form-group col-md-6 col-12">
                                         <label>Date of Birth</label>
-                                        <input type="" class="form-control" value="{{employee.dateofbirth}}" required="">
-                                        <div class="invalid-feedback">Please fill in the date</div>
+                                        
+                                        <div class="form-control">
+                                            {{form.dateofbirth}}
+                                        </div>
+
                                     </div>
                                     <div class="form-group col-md-6 col-12">
                                         <label>Gender</label>
-                                        <input type="tel" class="form-control" value="{{employee.gender}}">
+                                        <div class="form-control">
+                                            {{form.gender}}
+                                        </div>
                                     </div>
                                 </div>
-                                
+
+                                <div class="row">
+                                    <div class="form-group col-md-6 col-12">
+                                        <label>Department</label>
+
+                                        <div class="form-control">
+                                            {{form.department}}
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-6 col-12">
+                                        <label>Position</label>
+                                        <input type="text" name="position" class="form-control"
+                                            value="{{employee.position}}">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6 col-12 mt-sm-5">
+                                        <label>IdPhoto</label>
+                                        <div class="p-3">
+                                            <img src="{{employee.idphoto.url}}" width="300" height="200"  alt="panacea_idphoto">
+                                        </div>
+                                        <div class="form-control">
+                                            {{form.idphoto}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row  mt-3">
+                                    <div class="form-group col-md-6 col-12 mt-sm-5">
+                                        <label>Nhif</label>
+                                        <div class="p-3">
+                                            <img src="{{employee.nhifphoto.url}}" width="300" height="200"  alt="panacea_nhifphoto">
+                                        </div>
+                                        <div class="form-control">
+                                            {{form.nhifphoto}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="form-group col-md-6 col-12 mt-sm-5">
+                                        <label>Nssf</label>
+                                        <div class="p-3">
+                                            <img src="{{employee.nssfphoto.url}}" width="300" height="200"  alt="panacea_nssfphoto">
+                                        </div>
+                                        <div class="form-control">
+                                            {{form.nssfphoto}}
+                                        </div>
+                                    </div>
+                                </div>     
+
                             </div>
                             <div class="card-footer text-right">
-                                <button class="btn btn-primary">Save Changes</button>
+                                <button type="submit" class="btn btn-success">Save Changes</button>
+                                <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary" type="button">Cancel</a>
                             </div>
-                        </form>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
