@@ -4,14 +4,14 @@ from django.contrib import messages
 from . models import Employee, Sallary, Department
 from .forms import EmployeeForm, salaryForm
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Avg, Max, Min, Sum, Count  
 
 
 # dashboard views
 def home(request):
     employees = Employee.objects.all()
     departments = Department.objects.all()
-    salarys = Sallary.objects.all()
-   
+    salarys = Sallary.objects.all().aggregate(Sum('salary'))   
     
     context = {'employees': employees, 'departments': departments, 'salarys': salarys}
     return render(request, 'PanaceaApp/home.html', context)
